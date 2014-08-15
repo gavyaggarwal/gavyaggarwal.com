@@ -1,0 +1,44 @@
+// out: style.css, compress: true
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
+@import "mixins.less";
+
+html, body {
+  .margin(0px);
+  .padding(0px);
+  .size;
+  overflow:hidden;
+}
+
+#background {
+  .margin(0px);
+  .padding(0px);
+  .font(16px, 400);
+  .size;
+  background-color:#333;
+  background-image: url('slash_it.png');
+  color:#FFF;
+  @padding: 15px;
+  @spacer-width: 1px;
+  #spacer {
+    .margin(auto 0px);
+    .padding(0px);
+    .size(@spacer-width; calc(~"100% - "2 * @padding););
+    .inline;
+    background:white;
+  }
+  #pane1, #pane2 {
+    .margin(0px);
+    .padding(@padding);
+    .size(calc(~"50% - "2 * @padding + @spacer-width); calc(~"100% - "2 * @padding););
+    .inline;
+  }
+}
+
+#pane1 {
+  //background:red;
+}
+
+#pane2 {
+  //background:green;
+}
