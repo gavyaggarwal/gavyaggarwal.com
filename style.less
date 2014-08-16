@@ -1,44 +1,171 @@
-// out: style.css, compress: true
+//out:style.css,compress:true
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
 @import "mixins.less";
 
-html, body {
+html,body {
   .margin(0px);
   .padding(0px);
   .size;
-  overflow:hidden;
 }
 
 #background {
   .margin(0px);
   .padding(0px);
-  .font(16px, 400);
+  .font(16px,400);
   .size;
-  background-color:#333;
-  background-image: url('slash_it.png');
+  position:fixed;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
   color:#FFF;
+  background:#111;
+  z-index:-1;
   @padding: 15px;
   @spacer-width: 1px;
   #spacer {
+    .blur(1px);
     .margin(auto 0px);
     .padding(0px);
-    .size(@spacer-width; calc(~"100% - "2 * @padding););
+    .size(@spacer-width;calc(~"100% - "2 * @padding););
     .inline;
-    background:white;
+    background:#222;
   }
   #pane1, #pane2 {
+    .blur(1px);
     .margin(0px);
     .padding(@padding);
     .size(calc(~"50% - "2 * @padding + @spacer-width); calc(~"100% - "2 * @padding););
     .inline;
+    word-wrap:break-all;
+    white-space: nowrap;
+    opacity:0.2;
+    background-image:url('slash_it.png');
   }
 }
 
-#pane1 {
-  //background:red;
+#panel1 {
+  @padding: 15px;
+  .size(calc(~"100% - "2 * @padding);100%;);
+  .padding(0px @padding);
+  color:white;
+  h2 {
+    .font(64px);
+    .no_height;
+    text-align:center;
+  }
+  #items {
+  .no_height;
+    text-align:center;
+    h3 {
+      .font(24px);
+      .inline;
+    }
+  }
+  img {
+    .margin(auto);
+    .transition(opacity);
+    display:block;
+    cursor:pointer;
+    opacity:1.0;
+    &:hover {
+      opacity:0.6;
+    }
+  }
 }
 
-#pane2 {
-  //background:green;
+#panel2 {
+  @color:#FF7400;
+  @title-height:100px;
+  .size;
+  .padding(0px);
+  background:rgba(255,255,255,0.9);
+  color:@color;
+  h2 {
+    .font(64px);
+    .margin(0px);
+    text-align:center;
+    height:@title-height;
+  }
+  #slider {
+    .size("100%";calc(~"100% - "@title-height));
+  }
+}
+
+#slider {
+  @color:#FF7400;
+  @dots-height: 30px;
+  position:relative;
+  #viewport {
+    .size(calc(~"100% - 120px");calc(~"100% - "@dots-height););
+    .margin(0px);
+    .padding(0px 60px);
+    overflow-y:hidden;
+    overflow-x:hidden;
+    white-space:nowrap;
+    .slider-content {
+      @width:calc(~"100% - 120px");
+      .size(@width;100%;);
+      .margin(0px 60px);
+      .padding(0px);
+      .inline;
+      .font;
+      background:yellow;
+    }
+  }
+  #left,#right {
+    .margin(0px 0px);
+    .size(40px;40px;);
+    .mask-image('chevron.png');
+    .transition(opacity);
+    position:absolute;
+    top:calc(~"50% - 20px - "@dots-height/2);
+    background:@color;
+    cursor:pointer;
+    z-index:2;
+    opacity:0.6;
+    &:hover {
+      opacity:1;
+    }
+  }
+  #left {
+    .rotate(90);
+    left:40px;
+  }
+  #right {
+    .rotate(-90);
+    right:40px;
+  }
+  #dots {
+    .size(auto; @dots-height);
+    text-align:center;
+    .dot {
+      @dot-size:6px;
+      .margin(10px);
+      .size(@dot-size;@dot-size;);
+      .transition(background-color);
+      .inline;
+      border-radius:5px;
+      border:2px solid @color;
+      background-color:transparent;
+      cursor:pointer;
+      &:hover {
+        background-color:@color;
+      }
+    }
+    .selected {
+      background-color:@color;
+    }
+  }
+}
+
+.hspace {
+  .inline;
+  .size(50px);
+}
+
+.vspace {
+  .inline;
+  .size(100%, 20%);
 }

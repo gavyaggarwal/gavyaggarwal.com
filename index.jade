@@ -3,10 +3,36 @@ html(lang='en')
   head
     title Gavy Aggarwal
     link(rel='stylesheet', href='style.css', type='text/css')
-    script(type='text/javascript', src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(type='text/javascript', src='http://code.jquery.com/jquery-latest.min.js')
     script(type='text/javascript', src='script.js')
   body
     #background
       #pane1
       #spacer
-      #pane2 CSS GOES HERE
+      #pane2
+    #panel1(class='panel')
+      .vspace
+      h2 Gavy Aggarwal
+      .vspace
+      #items
+        h3 Developer
+        .hspace
+        h3 Designer
+        .hspace
+        h3 Hacker
+        .hspace
+        h3 Hustler
+      .vspace
+      .vspace
+      img(id='down-button', src='chevron.png')
+    #panel2(class='panel')
+      h2 Projects
+      #slider
+        #viewport
+          .slider-content First Page
+          .slider-content Second Page
+          .slider-content Third Page
+          .slider-content Fourth Page
+        #left
+        #right
+        #dots

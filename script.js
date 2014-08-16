@@ -1,57 +1,62 @@
 (function() {
-  var createElement, loadEditor, parseCode, typeBuffer, typeLine;
+  var createElement, loadEditor, scrollToPage, scrollerCurrentPage, scrollerMaxPage, scrollerMinPage, setupButtons, setupScroller, typeBuffer, typeCode, typeLine;
 
   $(function() {
     console.log("gavyaggarwal.com Loaded");
-    return loadEditor();
+    loadEditor();
+    setupButtons();
+    return setupScroller();
   });
 
   loadEditor = function() {
-    var request;
-    request = $.ajax("index.jade");
-    return request.done(function() {
-      return parseCode(request.responseText);
+    var request1, request2;
+    request1 = $.ajax("index.jade");
+    request1.done(function() {
+      return typeCode(request1.responseText, "#pane1");
+    });
+    request2 = $.ajax("style.less");
+    return request2.done(function() {
+      return typeCode(request2.responseText, "#pane2");
     });
   };
 
-  parseCode = function(code) {
-    var lines;
+  typeCode = function(code, pane) {
+    var finished, lines;
     lines = code.split("\n");
-    return typeLine(lines, 0);
+    finished = function() {
+      return console.log("Finished Typing Code");
+    };
+    return typeLine(lines, finished, pane, 0);
   };
 
-  typeLine = function(code, line) {
-    var text;
-    text = code[line];
-    typeBuffer(text, false, false, false);
-    $('#pane1').append('<br />');
-    typeBuffer(code[1]);
-    $('#pane1').append('<br />');
-    typeBuffer(code[2]);
-    $('#pane1').append('<br />');
-    typeBuffer(code[3]);
-    $('#pane1').append('<br />');
-    typeBuffer(code[4]);
-    $('#pane1').append('<br />');
-    typeBuffer(code[5]);
-    $('#pane1').append('<br />');
-    typeBuffer(code[6]);
-    $('#pane1').append('<br />');
-    return typeBuffer(code[7]);
+  typeLine = function(code, callback, pane, line) {
+    var finishedLine, text;
+    if (line === code.length) {
+      return callback();
+    } else {
+      text = code[line];
+      finishedLine = function() {
+        $(pane).append('<br />');
+        return typeLine(code, callback, pane, line + 1);
+      };
+      return typeBuffer(text, finishedLine, pane, 0);
+    }
   };
 
-  typeBuffer = function(buffer, hadSpace, inBrackets, inQuotes, callback) {
-    var arr, char, color, element, i, _i, _ref, _results, _results1;
-    arr = (function() {
-      _results = [];
-      for (var _i = 0, _ref = buffer.length; 0 <= _ref ? _i <= _ref : _i >= _ref; 0 <= _ref ? _i++ : _i--){ _results.push(_i); }
-      return _results;
-    }).apply(this);
-    _results1 = [];
-    for (i in arr) {
-      char = buffer.charAt(i);
-      if (!hadSpace) {
-        hadSpace = char === " ";
+  typeBuffer = function(buffer, callback, pane, index, isSecondWord, inBrackets, inQuotes, hadFirstSpace) {
+    var char, color, element, timerDone;
+    if (index === buffer.length) {
+      return callback();
+    } else {
+      char = buffer.charAt(index);
+      if (!hadFirstSpace) {
+        if (char !== " ") {
+          hadFirstSpace = true;
+        }
+      } else {
+        if (char === " ") {
+          isSecondWord = true;
+        }
       }
       if (inBrackets) {
         inBrackets = !(char === ")");
@@ -61,7 +66,10 @@
       if (char === "'") {
         inQuotes = !inQuotes;
       }
-      color = hadSpace ? "#DBDDDE" : "#FFCD02";
+      if (!hadFirstSpace) {
+        char = "&emsp;&emsp;";
+      }
+      color = isSecondWord ? "#DBDDDE" : "#FFCD02";
       if (inBrackets) {
         color = "#34AADC";
       }
@@ -75,15 +83,81 @@
         color = "#FF3B30";
       }
       element = createElement(char, color);
-      $('#pane1').append(element);
-      _results1.push(console.log(element));
+      $(pane).append(element);
+      timerDone = function() {
+        return typeBuffer(buffer, callback, pane, index + 1, isSecondWord, inBrackets, inQuotes, hadFirstSpace);
+      };
+      return setTimeout(timerDone, 100);
     }
-    return _results1;
   };
 
   createElement = function(char, color) {
     var span;
     return span = '<span style="color: ' + color + ';">' + char + '</span>';
+  };
+
+  setupButtons = function() {
+    return $("#down-button").click(function() {
+      return $('html,body').animate({
+        scrollTop: $("#panel2").offset().top
+      }, 1000);
+    });
+  };
+
+  scrollerCurrentPage = 0;
+
+  scrollerMinPage = 0;
+
+  scrollerMaxPage = 0;
+
+  setupScroller = function() {
+    var dot, dots, i, length, selectedClass, _i;
+    length = $(".slider-content").length;
+    scrollerCurrentPage = 0;
+    scrollerMinPage = 0;
+    scrollerMaxPage = length - 1;
+    dots = $("#dots");
+    for (i = _i = 0; 0 <= length ? _i < length : _i > length; i = 0 <= length ? ++_i : --_i) {
+      selectedClass = i === 0 ? " selected" : "";
+      dot = '<div class="dot' + selectedClass + '"></div>';
+      $(dots).append(dot);
+      $(dot).addClass('selected');
+    }
+    $("#left").click(function() {
+      scrollerCurrentPage--;
+      return scrollToPage();
+    });
+    $("#right").click(function() {
+      scrollerCurrentPage++;
+      return scrollToPage();
+    });
+    $(".dot").click(function() {
+      scrollerCurrentPage = $(this).index();
+      return scrollToPage();
+    });
+    return scrollToPage();
+  };
+
+  scrollToPage = function() {
+    var dots;
+    $("#left").css({
+      opacity: scrollerCurrentPage <= scrollerMinPage ? 0 : ''
+    });
+    $("#right").css({
+      opacity: scrollerCurrentPage >= scrollerMaxPage ? 0 : ''
+    });
+    if (scrollerCurrentPage < scrollerMinPage) {
+      scrollerCurrentPage = scrollerMinPage;
+    }
+    if (scrollerCurrentPage > scrollerMaxPage) {
+      scrollerCurrentPage = scrollerMaxPage;
+    }
+    $('#viewport').animate({
+      scrollLeft: ($('.slider-content').width() + 120) * scrollerCurrentPage
+    }, 1000);
+    dots = $(".dot");
+    $(dots).removeClass("selected");
+    return $(dots[scrollerCurrentPage]).addClass("selected");
   };
 
 }).call(this);
