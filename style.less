@@ -10,6 +10,9 @@ html,body {
 }
 
 #background {
+  @padding: 15px;
+  @spacer-width: 1px;
+  @two-pane-width: 640px;
   .margin(0px);
   .padding(0px);
   .font(16px,400);
@@ -22,8 +25,6 @@ html,body {
   color:#FFF;
   background:#111;
   z-index:-1;
-  @padding: 15px;
-  @spacer-width: 1px;
   #spacer {
     .blur(1px);
     .margin(auto 0px);
@@ -31,6 +32,10 @@ html,body {
     .size(@spacer-width;calc(~"100% - "2 * @padding););
     .inline;
     background:#222;
+    @media all and (max-width: @two-pane-width) {
+      .size(0px;0px;);
+      display:none;
+    }
   }
   #pane1, #pane2 {
     .blur(1px);
@@ -42,6 +47,17 @@ html,body {
     white-space: nowrap;
     opacity:0.2;
     background-image:url('slash_it.png');
+  }
+  #pane1 {
+    @media all and (max-width: @two-pane-width) {
+      .size(calc(~"100% - "2 * @padding);calc(~"100% - "2 * @padding););
+    }
+  }
+  #pane2 {
+    @media all and (max-width: @two-pane-width) {
+      .size(0px;0px;);
+      display:none;
+    }
   }
 }
 
@@ -104,6 +120,7 @@ html,body {
   .size;
   .padding(15px 0px);
   .small-caps;
+  .center;
   color:white;
   h2 {
     .font(64px);
@@ -113,6 +130,7 @@ html,body {
   .col {
     .inline;
     .size(33%);
+    min-width:300px;
     vertical-align:top;
   }
   .col:nth-child(3) {
@@ -154,6 +172,9 @@ html,body {
     .padding(15px);
     vertical-align:text-top;
     text-align:left;
+    @media all and (min-device-width : 320px) and (max-device-width : 568px) {
+      .size(264px);
+    }
   }
   a {
     color:@color;
@@ -166,7 +187,7 @@ html,body {
     background:white;
     overflow:hidden;
     input,textarea {
-      .size(380px;40px;);
+      .size(calc(~"100% - 20px");40px;);
       .font(20px);
       .padding(0px 10px);
       border-width:0px;
@@ -179,13 +200,13 @@ html,body {
       line-height:40px;
     }
     hr {
-      .size(380px;1px;);
+      .size(calc(~"100% - 20px");1px;);
       .margin(0px auto);
       background:@color;
       border-width:0px;
     }
     #submitform {
-      .size(400px;40px;);
+      .size(100%;40px;);
       .padding(0px);
       .transition(background);
       .font(24px);
@@ -209,12 +230,13 @@ html,body {
     opacity:0;
   }
   .box {
-    .size(116px;116px;);
-    .margin(11px 0px 0px 11px);
+    .size(118px;118px;);
+    .margin(8px 0px 0px 8px);
     .padding(5px);
     .inline;
     .transition(background);
     .center;
+    text-decoration:none;
     background:fade(@color, 80%);
     color:white;
     cursor:pointer;
@@ -222,13 +244,19 @@ html,body {
     &:hover {
       background:@color;
     }
-    &:nth-child(3n+2) {
-      margin-left:0px;
+    @media all and (min-device-width : 320px) and (max-device-width : 568px) {
+      &:nth-child(2n+2) {
+        margin-left:0px;
+      }
+    }
+    @media all and (min-device-width : 568px) {
+      &:nth-child(3n+2) {
+        margin-left:0px;
+      }
     }
     img {
       .size(auto;60px);
       .margin(14px 0px 0px 0px);
-      //background:green;
     }
     span {
       .font(24px);
