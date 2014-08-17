@@ -3,6 +3,7 @@ $ ->
   do loadEditor
   do setupButtons
   do setupScroller
+  do setupContactForm
 
 loadEditor = ->
   request1 = $.ajax("index.jade")
@@ -68,6 +69,11 @@ setupButtons = ->
     $('html,body').animate
        scrollTop: $("#panel2").offset().top
        1000
+  $("#up-button").click ->
+    $('html,body').animate
+      scrollTop: 0
+      1000
+
 
 
 scrollerCurrentPage = 0
@@ -83,7 +89,6 @@ setupScroller = ->
     selectedClass = if i is 0 then " selected" else ""
     dot = '<div class="dot' + selectedClass + '"></div>'
     $(dots).append(dot)
-    $(dot).addClass('selected')
   $("#left").click ->
     scrollerCurrentPage--
     do scrollToPage
@@ -108,3 +113,66 @@ scrollToPage = ->
   dots = $(".dot")
   $(dots).removeClass("selected")
   $(dots[scrollerCurrentPage]).addClass("selected")
+
+setupContactForm = ->
+  $("#contactmessage").keyup ->
+    this.style.height = '1px'
+    this.style.height = (40 + this.scrollHeight) + 'px'
+  $("#submitform").click ->
+    form = $("form")
+    name    = do $(form).find("input[name=name]").val
+    email   = do $(form).find("input[name=email]").val
+    subject = do $(form).find("input[name=subject]").val
+    message = do $(form).find("input[name=message]").val
+    if name is "" or email is "" or subject is "" or message is ""
+      console.log "Invalid Form Data"
+      span = $(this).find("span")
+
+      $(span).transition
+        x:'20px'
+        70
+        'ease'
+      $(span).transition
+        x:'-20px'
+        140
+        'ease'
+      $(span).transition
+        x:'20px'
+        140
+        'ease'
+      $(span).transition
+        x:'-20px'
+        140
+        'ease'
+      $(span).transition
+        x:'0px'
+        70
+        'ease'
+    else
+      formData = do $(form).serialize
+      status = $("#contactstatus")
+      formError = ->
+        $(status).html "Something went wrong! Just shoot me an <a href='mailto:gavyaggarwal@gmail.com'>email</a> instead."
+        $(status).css
+          opacity:1
+        console.log "Error Submitting Contact Form"
+      formSuccess = ->
+        $(status).html "Thanks for getting in touch. I'll get back to you soon!"
+        $(status).css
+          opacity:1
+        $(form).find("input[type=text], textarea").val ""
+        console.log "Contact Form Submitted Successfully"
+      formSubmitted = ->
+        $(status).html "Loading"
+        $(status).css
+          opacity:1
+      $.ajax
+        url: "http://bin.gavyaggarwal.com/mailer?" + formData
+        success: (data) ->
+          if data is "success"
+            do formSuccess
+          else
+            do formError
+        error: ->
+          do formError
+      do formSubmitted

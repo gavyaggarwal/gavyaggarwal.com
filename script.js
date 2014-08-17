@@ -1,11 +1,12 @@
 (function() {
-  var createElement, loadEditor, scrollToPage, scrollerCurrentPage, scrollerMaxPage, scrollerMinPage, setupButtons, setupScroller, typeBuffer, typeCode, typeLine;
+  var createElement, loadEditor, scrollToPage, scrollerCurrentPage, scrollerMaxPage, scrollerMinPage, setupButtons, setupContactForm, setupScroller, typeBuffer, typeCode, typeLine;
 
   $(function() {
     console.log("gavyaggarwal.com Loaded");
     loadEditor();
     setupButtons();
-    return setupScroller();
+    setupScroller();
+    return setupContactForm();
   });
 
   loadEditor = function() {
@@ -97,9 +98,14 @@
   };
 
   setupButtons = function() {
-    return $("#down-button").click(function() {
+    $("#down-button").click(function() {
       return $('html,body').animate({
         scrollTop: $("#panel2").offset().top
+      }, 1000);
+    });
+    return $("#up-button").click(function() {
+      return $('html,body').animate({
+        scrollTop: 0
       }, 1000);
     });
   };
@@ -121,7 +127,6 @@
       selectedClass = i === 0 ? " selected" : "";
       dot = '<div class="dot' + selectedClass + '"></div>';
       $(dots).append(dot);
-      $(dot).addClass('selected');
     }
     $("#left").click(function() {
       scrollerCurrentPage--;
@@ -158,6 +163,78 @@
     dots = $(".dot");
     $(dots).removeClass("selected");
     return $(dots[scrollerCurrentPage]).addClass("selected");
+  };
+
+  setupContactForm = function() {
+    $("#contactmessage").keyup(function() {
+      this.style.height = '1px';
+      return this.style.height = (40 + this.scrollHeight) + 'px';
+    });
+    return $("#submitform").click(function() {
+      var email, form, formData, formError, formSubmitted, formSuccess, message, name, span, status, subject;
+      form = $("form");
+      name = $(form).find("input[name=name]").val();
+      email = $(form).find("input[name=email]").val();
+      subject = $(form).find("input[name=subject]").val();
+      message = $(form).find("input[name=message]").val();
+      if (name === "" || email === "" || subject === "" || message === "") {
+        console.log("Invalid Form Data");
+        span = $(this).find("span");
+        $(span).transition({
+          x: '20px'
+        }, 70, 'ease');
+        $(span).transition({
+          x: '-20px'
+        }, 140, 'ease');
+        $(span).transition({
+          x: '20px'
+        }, 140, 'ease');
+        $(span).transition({
+          x: '-20px'
+        }, 140, 'ease');
+        return $(span).transition({
+          x: '0px'
+        }, 70, 'ease');
+      } else {
+        formData = $(form).serialize();
+        status = $("#contactstatus");
+        formError = function() {
+          $(status).html("Something went wrong! Just shoot me an <a href='mailto:gavyaggarwal@gmail.com'>email</a> instead.");
+          $(status).css({
+            opacity: 1
+          });
+          return console.log("Error Submitting Contact Form");
+        };
+        formSuccess = function() {
+          $(status).html("Thanks for getting in touch. I'll get back to you soon!");
+          $(status).css({
+            opacity: 1
+          });
+          $(form).find("input[type=text], textarea").val("");
+          return console.log("Contact Form Submitted Successfully");
+        };
+        formSubmitted = function() {
+          $(status).html("Loading");
+          return $(status).css({
+            opacity: 1
+          });
+        };
+        $.ajax({
+          url: "http://bin.gavyaggarwal.com/mailer?" + formData,
+          success: function(data) {
+            if (data === "success") {
+              return formSuccess();
+            } else {
+              return formError();
+            }
+          },
+          error: function() {
+            return formError();
+          }
+        });
+        return formSubmitted();
+      }
+    });
   };
 
 }).call(this);

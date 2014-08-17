@@ -4,6 +4,7 @@ html(lang='en')
     title Gavy Aggarwal
     link(rel='stylesheet', href='style.css', type='text/css')
     script(type='text/javascript', src='http://code.jquery.com/jquery-latest.min.js')
+    script(type='text/javascript', src='transit.js')
     script(type='text/javascript', src='script.js')
   body
     #background
@@ -29,10 +30,82 @@ html(lang='en')
       h2 Projects
       #slider
         #viewport
-          .slider-content First Page
-          .slider-content Second Page
-          .slider-content Third Page
-          .slider-content Fourth Page
+          .slider-content
+            img(src='http://totallycoolpix.com/wp-content/uploads/2011/20052011_scenic_photos/scenic_039.jpg')
+          .slider-content
+            img(src='http://totallycoolpix.com/wp-content/uploads/2011/20052011_scenic_photos/scenic_003.jpg')
+          .slider-content
+            img(src='http://totallycoolpix.com/wp-content/uploads/2011/20052011_scenic_photos/scenic_005.jpg')
+          .slider-content
+            img(src='http://totallycoolpix.com/wp-content/uploads/2011/20052011_scenic_photos/scenic_017.jpg')
         #left
         #right
         #dots
+    #panel3
+      h2 Skills
+      .col
+        h3 Front End
+        h4 HTML5
+        h4 CSS3
+        h4 JavaScript
+        h4 Jade
+        h4 LESS
+        h4 jQuery
+        h4 CoffeeScript
+      .col
+        h3 Back End
+        h4 node.js
+        h4 PHP
+        h4 MySQL
+        h4 Parse
+        h4 Amazon AWS
+        h4 Wireshark
+      .col
+        h3 Mobile
+        h4 iPhone & iPad
+        h4 Android
+        h4 Windows Phone
+        h4 Titanium Appcelerator
+        h4 Objective C
+        h4 Swift
+        h4 Java
+        h4 C#
+    #panel4
+      h2 Contact
+      .col
+        h3 Get In Touch
+        form
+          input(type='text', name='name', placeholder='Name')
+          hr
+          input(type='text', name='email', placeholder='Email')
+          hr
+          input(type='text', name='subject', placeholder='Subject')
+          hr
+          textarea(placeholder='Message', name='message', id="contactmessage")
+          #submitform
+            span Submit
+        h5(id="contactstatus")
+      .col
+        h3 Find Me On
+        .box
+          img(src='facebook.png')
+          span Facebook
+        .box
+          img(src='twitter.png')
+          span Twitter
+        .box
+          img(src='google.png')
+          span Google+
+        .box
+          img(src='github.png')
+          span Github
+        .box
+          img(src='instagram.png')
+          span Instagram
+        .box
+          img(src='linkedin.png')
+          span LinkedIn
+    #panel5
+      h4 Copyright 2014 by Gavy Aggarwal
+      h5 Built Using Jade, LESS, Coffee, and Love
+      img(id='up-button', src='chevron.png')
