@@ -28,6 +28,22 @@
   height: @element-height;
 }
 
+.position(@position: absolute; @top: auto; @left: auto; @bottom: auto; @right: auto) {
+  position: @position;
+  top: @top;
+  left: @left;
+  right: @right;
+  bottom: @bottom;
+}
+
+.no-select {
+  user-select:none;
+  -o-user-select:none;
+  -ms-user-select:none;
+  -moz-user-select:none;
+  -webkit-user-select:none;
+}
+
 .transition(@property; @duration: 0.4s) {
    transition: @property @duration ease-in-out;
    -o-transition: @property @duration ease-in-out;
@@ -44,6 +60,14 @@
   -webkit-filter: blur(@blur-radius);
 }
 
+.drop-shadow(@shadow: 0px 0px 1px rgba(0,0,0,.5)) {
+  filter: drop-shadow(@shadow);
+  -o-filter: drop-shadow(@shadow);
+  -ms-filter: drop-shadow(@shadow);
+  -moz-filter: drop-shadow(@shadow);
+  -webkit-filter: drop-shadow(@shadow);
+}
+
 .rotate(@degree: 90) {
   transform: rotate(@degree * 1deg);
   -o-transform: rotate(@degree * 1deg);
@@ -52,6 +76,14 @@
   -webkit-transform: rotate(@degree * 1deg);
   @IEdeg: round(@degree / 90, 0);
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=@IEdeg);
+}
+
+.transform(@string){
+  transform: @string;
+  -o-transform: @string;
+  -ms-transform: @string;
+  -moz-transform: @string;
+  -webkit-transform: @string;
 }
 
 .mask-image(@url:'') {
@@ -65,9 +97,4 @@
 .inline {
   display:inline-block;
   vertical-align:middle;
-}
-
-.no_height {
-  .margin(0px);
-  max-height:0px;
 }

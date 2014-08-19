@@ -12,27 +12,50 @@ html(lang='en')
       #pane1
       #spacer
       #pane2
-    #panel1(class='panel')
-      .vspace
-      h2 Gavy Aggarwal
-      .vspace
-      #items
-        h3 Developer
-        .hspace
-        h3 Designer
-        .hspace
-        h3 Hacker
-        .hspace
-        h3 Hustler
-      .vspace
-      .vspace
-      img(id='down-button', src='chevron.png')
-    #panel2(class='panel')
+    #panel1
+      #content
+        h2 Gavy Aggarwal
+        #items
+          h3 Developer
+          #tooltip1
+            #container
+              span de&#183;vel&#183;op&#183;er
+              br
+              span A hard-working person devoted to transforming dreams into tangible products
+          h3 Designer
+          #tooltip2
+            #container
+              span de&#183;sign&#183;er
+              br
+              span An innovative idealist committed to making seamless, pixel-perfect interfaces
+          h3 Hacker
+          #tooltip3
+            #container
+              span hack&#183;er
+              br
+              span A brilliant mastermind eager to fiddle with things he's not supposed to
+          h3 Hustler
+          #tooltip4
+            #container
+              span hus&#183;tler
+              br
+              span An aggressive go-doer who'll do anything to overcome the obstacles in his way
+        img(id='down-button', src='chevron.png')
+    #panel2
       h2 Projects
       #slider
         #viewport
-          .slider-content
-            img(src='http://totallycoolpix.com/wp-content/uploads/2011/20052011_scenic_photos/scenic_039.jpg')
+          .slider-content(id='dyli')
+            .col
+              img#logo(src='images/dyli1.png')
+              br
+              p I developed the front-end of dyli, a unique fashion app that lets you discover designers, brands, and boutiques based on your fasion tastes.
+              p Summer 2014
+              p
+                a(href='https://itunes.apple.com/us/app/id858505722') Download
+                a(href='http://dyliapp.com') Learn More
+            .col
+              img(src='images/dyli2.png')
           .slider-content
             img(src='http://totallycoolpix.com/wp-content/uploads/2011/20052011_scenic_photos/scenic_003.jpg')
           .slider-content
