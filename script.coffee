@@ -4,6 +4,7 @@ $ ->
   do setupButtons
   do setupScroller
   do setupContactForm
+  do setupHashes
 
 loadEditor = ->
   request1 = $.ajax("index.jade")
@@ -67,7 +68,7 @@ createElement = (char, color) ->
 setupButtons = ->
   $("#down-button").click ->
     $('html,body').animate
-       scrollTop: $("#panel2").offset().top
+       scrollTop:$("#panel2").offset().top
        1000
   $("#up-button").click ->
     $('html,body').animate
@@ -107,8 +108,9 @@ scrollToPage = ->
     opacity:if scrollerCurrentPage >= scrollerMaxPage then 0 else ''
   scrollerCurrentPage = scrollerMinPage if scrollerCurrentPage < scrollerMinPage
   scrollerCurrentPage = scrollerMaxPage if scrollerCurrentPage > scrollerMaxPage
+  offsetLeft =  $($('.slider-content')[scrollerCurrentPage]).offset().left
   $('#viewport').animate
-    scrollLeft:($('.slider-content').width() + 120) * scrollerCurrentPage
+    scrollLeft: '+=' + offsetLeft
     1000
   dots = $(".dot")
   $(dots).removeClass("selected")
@@ -152,7 +154,8 @@ setupContactForm = ->
       formData = do $(form).serialize
       status = $("#contactstatus")
       formError = ->
-        $(status).html "Something went wrong! Just shoot me an <a href='mailto:gavyaggarwal@gmail.com'>email</a> instead."
+        $(status).html "Something went wrong! Just shoot me an
+        <a href='mailto:gavyaggarwal@gmail.com'>email</a> instead."
         $(status).css
           opacity:1
         console.log "Error Submitting Contact Form"
@@ -176,3 +179,15 @@ setupContactForm = ->
         error: ->
           do formError
       do formSubmitted
+
+setupHashes = ->
+  onScroll = ->
+    $('.anchor').each ->
+      elemTop = $(this).offset().top
+      elemHeight = $(this).parent().height()
+      winTop = window.pageYOffset
+      if elemTop < winTop + 10 and (elemTop + elemHeight) > winTop + 10
+        window.location.hash = $(this).attr 'id'
+        $(document).scrollTop winTop #Prevents Scrolling
+    #console.log window.pageYOffset
+  $(document).bind 'scroll', onScroll

@@ -1,5 +1,3 @@
-//out:style.css,compress:true
-
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600);
 @import "mixins.less";
 
@@ -124,44 +122,100 @@ html,body {
     .size();
     .slider-content {
       font-variant:normal;
+      h1 {
+        .font(54px);
+        .margin(0px);
+        font-variant:small-caps;
+      }
+      a {
+        .inline;
+        .padding(10px);
+        .font(18px);
+        .margin(5px);
+        .size(100px);
+        .transition(all);
+        box-shadow:0 0 1px @color;
+        border:1px solid @color;
+        border-radius:10px;
+        text-decoration:none;
+        background:fade(@color, 80%);
+        color:white;
+        &:hover {
+          background:@color;
+        }
+      }
+      .col {
+        .size(50%);
+        .inline;
+        vertical-align:middle;
+        @media screen and (max-width: 800px) {
+          .size(100%);
+        }
+      }
+    }
+    #passprotect {
+      @color:#34aadc;
+      .center;
+      color:@color;
+      img {
+        .size(1040px);
+        max-width:100%;
+      }
+      a {
+        .size(200px);
+        box-shadow:0 0 1px @color;
+        border:1px solid @color;
+        background:fade(@color, 80%);
+        &:hover {
+          background:@color;
+        }
+      }
     }
     #dyli {
+      .center;
       @color:#ee355c;
       color:@color;
       .col {
-        .inline;
-        vertical-align:middle;
         &:first-child {
-          .size(calc(~"100% - 513px");100%);
           #logo {
             .margin(auto);
             .drop-shadow;
             display:block;
           }
-          p {
-            .center;
-          }
           a {
-            .inline;
-            .padding(10px 10px);
-            .font(18px);
-            .margin(0px 5px);
-            .size(120px);
-            .transition(all);
+            .size(100px);
             box-shadow:0 0 1px @color;
             border:1px solid @color;
-            border-radius:10px;
-            text-decoration:none;
             background:fade(@color, 80%);
-            color:white;
             &:hover {
               background:@color;
             }
           }
         }
         &:last-child {
-          .padding(0 0 0 40px);
-          .size(473px;100%);
+          img {
+            max-width:473px;
+            max-height:100%;
+          }
+        }
+      }
+    }
+    #remotemusic {
+      @color:#FF8C00;
+      .center;
+      color:@color;
+      img {
+        .size(auto;auto;);
+        max-width:490px;
+        max-height:100%;
+      }
+      a {
+        .size(200px);
+        box-shadow:0 0 1px @color;
+        border:1px solid @color;
+        background:fade(@color, 80%);
+        &:hover {
+          background:@color;
         }
       }
     }
@@ -351,21 +405,24 @@ html,body {
   @dots-height: 30px;
   .position(relative);
   #viewport {
-    .size(calc(~"100% - 120px");auto;);
+    .size();
     .margin(0px);
-    .padding(0px 60px);
+    .padding(0px);
     overflow-y:hidden;
     overflow-x:hidden;
     white-space:nowrap;
     .slider-content {
-      @width:calc(~"100% - 120px");
-      .size(@width;100%;);
-      .margin(0px 60px);
-      .padding(0px);
+      .size(calc(~"100% - 240px");100%;);
+      .margin(0px);
+      .padding(0px 120px);
       .inline;
       .font;
       white-space:normal;
       word-wrap:break-word;
+      @media screen and (max-width: 600px) {
+        .size(calc(~"100% - 10px");100%);
+        .padding(5px);
+      }
     }
   }
   #left,#right {
@@ -398,7 +455,7 @@ html,body {
       @dot-size:6px;
       .margin(10px);
       .size(@dot-size;@dot-size;);
-      .transition(background-color);
+      .transition(all);
       .inline;
       border-radius:5px;
       border:2px solid @color;
@@ -409,6 +466,7 @@ html,body {
       }
     }
     .selected {
+      .transform(scale(1.2));
       background-color:@color;
     }
   }

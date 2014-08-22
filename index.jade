@@ -13,6 +13,7 @@ html(lang='en')
       #spacer
       #pane2
     #panel1
+      a#top.anchor
       #content
         h2 Gavy Aggarwal
         #items
@@ -40,32 +41,44 @@ html(lang='en')
               span hus&#183;tler
               br
               span An aggressive go-doer who'll do anything to overcome the obstacles in his way
-        img(id='down-button', src='chevron.png')
+        a(href='#projects')
+          img(id='down-button', src='chevron.png')
     #panel2
+      a#projects.anchor
       h2 Projects
       #slider
         #viewport
+          .slider-content(id='passprotect')
+            p PassProtect is a cross-platform password manager app that I created when I got tired of trying to remember all my passwords and losing the sticky notes I used to write them on. I've really focused on security and UX design in this app.
+            img(src='images/passprotect.png')
+            p
+              a(href='http://passprotect.co') Visit Website
+              a(href='https://itunes.apple.com/us/app/id906481898') Download for iOS
+              a(href='https://play.google.com/store/apps/details?id=co.passprotect') Download for Android
           .slider-content(id='dyli')
             .col
               img#logo(src='images/dyli1.png')
               br
               p I developed the front-end of dyli, a unique fashion app that lets you discover designers, brands, and boutiques based on your fasion tastes.
-              p Summer 2014
               p
                 a(href='https://itunes.apple.com/us/app/id858505722') Download
                 a(href='http://dyliapp.com') Learn More
             .col
               img(src='images/dyli2.png')
-          .slider-content
-            img(src='http://totallycoolpix.com/wp-content/uploads/2011/20052011_scenic_photos/scenic_003.jpg')
-          .slider-content
-            img(src='http://totallycoolpix.com/wp-content/uploads/2011/20052011_scenic_photos/scenic_005.jpg')
-          .slider-content
-            img(src='http://totallycoolpix.com/wp-content/uploads/2011/20052011_scenic_photos/scenic_017.jpg')
+          .slider-content(id="remotemusic")
+            .col
+              img(src='images/remotemusic.png')
+            .col
+              h1 Remote Music
+              p Remote Music is a proof of concept application that hosts a web server from an iOS device, allowing computers on the same network to connect and play songs from the device's music gallery. I decided to open source this app to demonstrate how I was able to accomplish this and allow others to learn from the source code.
+              p
+                a(href='https://itunes.apple.com/app/id687568996') Download for iOS
+                a(href='https://github.com/gavyaggarwal/Remote-Music') View Source Code
         #left
         #right
         #dots
     #panel3
+      a#skills.anchor
       h2 Skills
       .col
         h3 Front End
@@ -95,6 +108,7 @@ html(lang='en')
         h4 Java
         h4 C#
     #panel4
+      a#contact.anchor
       h2 Contact
       .col
         h3 Get In Touch
@@ -130,6 +144,8 @@ html(lang='en')
           img(src='linkedin.png')
           span LinkedIn
     #panel5
+      a#bottom.anchor
       h4 Copyright 2014 by Gavy Aggarwal
       h5 Built Using Jade, LESS, Coffee, and Love
-      img(id='up-button', src='chevron.png')
+      a(href='#top')
+        img(id='up-button', src='chevron.png')
