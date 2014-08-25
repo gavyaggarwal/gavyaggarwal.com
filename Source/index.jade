@@ -2,12 +2,12 @@ doctype html
 html(lang='en')
   head
     title Gavy Aggarwal
-    link(rel='stylesheet', href='style.css', type='text/css')
+    link(rel='stylesheet', href='css/style.css', type='text/css')
     meta(name='viewport', content='width=device-width, maximum-scale=1.0')
     script(type='text/javascript', src='http://code.jquery.com/jquery-2.1.1.min.js')
-    script(type='text/javascript', src='transit.js')
-    script(type='text/javascript', src='analytics.js')
-    script(type='text/javascript', src='script.js')
+    script(type='text/javascript', src='js/transit.js')
+    script(type='text/javascript', src='js/analytics.js')
+    script(type='text/javascript', src='js/script.js')
   body
     #background
       #pane1
@@ -42,8 +42,7 @@ html(lang='en')
               span hus&#183;tler
               br
               span An aggressive go-doer who'll do anything to overcome the obstacles in his way
-        a(href='#projects')
-          #down-button
+        a#down-button(href='#projects')
     #panel2
       a#projects.anchor
       h2 Projects
@@ -148,5 +147,4 @@ html(lang='en')
       a#bottom.anchor
       h4 Copyright 2014 by Gavy Aggarwal
       h5 Built Using Jade, LESS, Coffee, and Love
-      a(href='#top')
-        #up-button
+      a#up-button(href='#top')

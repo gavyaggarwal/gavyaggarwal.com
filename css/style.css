@@ -86,13 +86,13 @@ body img {
   overflow: hidden;
   white-space: nowrap;
   opacity: 0.2;
-  background-image: url('images/slash_it.png');
+  background-image: url('../images/slash_it.png');
   background-size: cover;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   #background #pane1,
   #background #pane2 {
-    background-image: url('images/slash_it@2x.png');
+    background-image: url('../images/slash_it@2x.png');
     background-size: cover;
   }
 }
@@ -114,6 +114,7 @@ body img {
   width: 100%;
   min-height: 100%;
   display: table;
+  overflow-x: hidden;
 }
 #panel1 #content {
   padding: 30px;
@@ -169,14 +170,14 @@ body img {
   -moz-transition: opacity 0.4s ease-in-out;
   -webkit-transition: opacity 0.4s ease-in-out;
   margin: 50px auto 0px auto;
-  background: url(images/chevron.png);
+  background: url(../images/chevron.png);
   background-size: cover;
   display: block;
   opacity: 1.0;
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   #panel1 #content #down-button {
-    background: url(images/chevron@2x.png);
+    background: url(../images/chevron@2x.png);
     background-size: cover;
   }
 }
@@ -541,7 +542,7 @@ body img {
 }
 @media screen and (max-width: 479px) {
   #panel5 h4 {
-    margin: 0px 65px;
+    margin: 0px 70px;
   }
 }
 #panel5 h5 {
@@ -570,7 +571,7 @@ body img {
   left: auto;
   right: 20px;
   bottom: 0px;
-  background: url(images/chevron.png);
+  background: url(../images/chevron.png);
   background-size: cover;
   opacity: 1.0;
 }
@@ -579,13 +580,13 @@ body img {
     position: absolute;
     top: 28px;
     left: auto;
-    right: 10px;
+    right: 15px;
     bottom: auto;
   }
 }
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   #panel5 #up-button {
-    background: url(images/chevron@2x.png);
+    background: url(../images/chevron@2x.png);
     background-size: cover;
   }
 }
@@ -633,11 +634,11 @@ body img {
   margin: 0px 0px;
   width: 40px;
   height: 40px;
-  mask-image: url('images/chevron.png');
-  -o-mask-image: url('images/chevron.png');
-  -ms-mask-image: url('images/chevron.png');
-  -moz-mask-image: url('images/chevron.png');
-  -webkit-mask-image: url('images/chevron.png');
+  mask-image: url('../images/chevron.png');
+  -o-mask-image: url('../images/chevron.png');
+  -ms-mask-image: url('../images/chevron.png');
+  -moz-mask-image: url('../images/chevron.png');
+  -webkit-mask-image: url('../images/chevron.png');
   -webkit-mask-size: cover;
   transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
@@ -652,11 +653,11 @@ body img {
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   #slider #left,
   #slider #right {
-    mask-image: url('images/chevron@2x.png');
-    -o-mask-image: url('images/chevron@2x.png');
-    -ms-mask-image: url('images/chevron@2x.png');
-    -moz-mask-image: url('images/chevron@2x.png');
-    -webkit-mask-image: url('images/chevron@2x.png');
+    mask-image: url('../images/chevron@2x.png');
+    -o-mask-image: url('../images/chevron@2x.png');
+    -ms-mask-image: url('../images/chevron@2x.png');
+    -moz-mask-image: url('../images/chevron@2x.png');
+    -webkit-mask-image: url('../images/chevron@2x.png');
     -webkit-mask-size: cover;
     background-size: cover;
   }

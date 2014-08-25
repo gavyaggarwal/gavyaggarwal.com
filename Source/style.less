@@ -44,10 +44,10 @@ html,body {
     overflow:hidden;
     white-space: nowrap;
     opacity:0.2;
-    background-image:url('images/slash_it.png');
+    background-image:url('../images/slash_it.png');
     background-size:cover;
     @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-      background-image:url('images/slash_it@2x.png');
+      background-image:url('../images/slash_it@2x.png');
       background-size:cover;
     }
   }
@@ -69,6 +69,7 @@ html,body {
   width:100%;
   min-height:100%;
   display:table;
+  overflow-x:hidden;
   #content {
     .padding(30px);
     .small-caps;
@@ -105,12 +106,12 @@ html,body {
       .margin(auto);
       .transition(opacity);
       .margin(50px auto 0px auto);
-      background:url(images/chevron.png);
+      background:url(../images/chevron.png);
       background-size:cover;
       display:block;
       opacity:1.0;
       @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-        background:url(images/chevron@2x.png);
+        background:url(../images/chevron@2x.png);
         background-size:cover;
       }
       &:hover {
@@ -403,7 +404,7 @@ html,body {
     .font(24px);
     .margin(0px);
     @media screen and (max-width: 479px) {
-      .margin(0px 65px);
+      .margin(0px 70px);
     }
   }
   h5 {
@@ -416,14 +417,14 @@ html,body {
     .margin(auto);
     .transition(opacity);
     .position(absolute;0px;auto;0px;20px);
-    background:url(images/chevron.png);
+    background:url(../images/chevron.png);
     background-size:cover;
     opacity:1.0;
     @media screen and (max-width: 320px) {
-      .position(absolute;28px;auto;auto;10px);
+      .position(absolute;28px;auto;auto;15px);
     }
     @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-      background:url(images/chevron@2x.png);
+      background:url(../images/chevron@2x.png);
       background-size:cover;
     }
     &:hover {
@@ -460,14 +461,14 @@ html,body {
   #left,#right {
     .margin(0px 0px);
     .size(40px;40px;);
-    .mask-image('images/chevron.png');
+    .mask-image('../images/chevron.png');
     .transition(all);
     background:@color;
     cursor:pointer;
     z-index:1;
     opacity:0.6;
     @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-      .mask-image('images/chevron@2x.png');
+      .mask-image('../images/chevron@2x.png');
       background-size:cover;
     }
     &:hover {

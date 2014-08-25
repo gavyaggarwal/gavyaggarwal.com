@@ -1,5 +1,3 @@
-isDev = yes
-
 $ ->
   console.log "gavyaggarwal.com Loaded"
   do loadEditor
@@ -11,10 +9,10 @@ $ ->
   do monitorStatus
 
 loadEditor = ->
-  request1 = $.ajax("index.jade")
+  request1 = $.ajax("Source/index.jade")
   request1.done ->
     typeCode request1.responseText, "#pane1"
-  request2 = $.ajax("style.less")
+  request2 = $.ajax("Source/style.less")
   request2.done ->
     typeCode request2.responseText, "#pane2"
 
@@ -246,6 +244,9 @@ setupAnalytics = ->
     return
   ) window, document, "script", "//www.google-analytics.com/analytics.js", "ga"
 
+  #Only the production version should have www in the URL
+  isDev = not ~window.location.href.indexOf 'www'
+  if isDev then console.log 'Development Version' else console.log 'Production Version'
   trackingID = if isDev then 'UA-54102576-1' else 'UA-54102576-2'
   ga 'create', trackingID,
     alwaysSendReferrer:yes
