@@ -86,7 +86,15 @@ body img {
   overflow: hidden;
   white-space: nowrap;
   opacity: 0.2;
-  background-image: url('slash_it.png');
+  background-image: url('images/slash_it.png');
+  background-size: cover;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  #background #pane1,
+  #background #pane2 {
+    background-image: url('images/slash_it@2x.png');
+    background-size: cover;
+  }
 }
 @media all and (max-width: 640px) {
   #background #pane1 {
@@ -144,7 +152,16 @@ body img {
   -moz-transform: translateX(0px) scale(1);
   -webkit-transform: translateX(0px) scale(1);
 }
-#panel1 #content img {
+#panel1 #content h4 {
+  font-size: 32px;
+  font-weight: 300;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0px;
+  text-align: center;
+}
+#panel1 #content #down-button {
+  width: 40px;
+  height: 40px;
   margin: auto;
   transition: opacity 0.4s ease-in-out;
   -o-transition: opacity 0.4s ease-in-out;
@@ -152,11 +169,18 @@ body img {
   -moz-transition: opacity 0.4s ease-in-out;
   -webkit-transition: opacity 0.4s ease-in-out;
   margin: 50px auto 0px auto;
+  background: url(images/chevron.png);
+  background-size: cover;
   display: block;
-  cursor: pointer;
   opacity: 1.0;
 }
-#panel1 #content img:hover {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  #panel1 #content #down-button {
+    background: url(images/chevron@2x.png);
+    background-size: cover;
+  }
+}
+#panel1 #content #down-button:hover {
   opacity: 0.8;
 }
 #panel2 {
@@ -164,10 +188,15 @@ body img {
   height: auto;
   padding: 15px 0px;
   font-variant: small-caps;
-  border-top: 2px solid #4cd964;
-  border-bottom: 2px solid #4cd964;
+  transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  border-top: 2px solid #34aadc;
+  border-bottom: 2px solid #34aadc;
   background: rgba(255, 255, 255, 0.9);
-  color: #4cd964;
+  color: #34aadc;
 }
 #panel2 h2 {
   font-size: 64px;
@@ -205,15 +234,15 @@ body img {
   -ms-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -webkit-transition: all 0.4s ease-in-out;
-  box-shadow: 0 0 1px #4cd964;
-  border: 1px solid #4cd964;
+  box-shadow: 0 0 1px #34aadc;
+  border: 1px solid #34aadc;
   border-radius: 10px;
   text-decoration: none;
-  background: rgba(76, 217, 100, 0.8);
+  background: rgba(52, 170, 220, 0.8);
   color: white;
 }
 #panel2 #slider .slider-content a:hover {
-  background: #4cd964;
+  background: #34aadc;
 }
 #panel2 #slider .slider-content .col {
   width: 50%;
@@ -271,7 +300,7 @@ body img {
 }
 #panel2 #slider #dyli .col:last-child img {
   max-width: 473px;
-  max-height: 100%;
+  max-height: 80%;
 }
 #panel2 #slider #remotemusic {
   text-align: center;
@@ -281,7 +310,7 @@ body img {
   width: auto;
   height: auto;
   max-width: 490px;
-  max-height: 100%;
+  max-height: 80%;
 }
 #panel2 #slider #remotemusic a {
   width: 200px;
@@ -447,20 +476,21 @@ body img {
   width: 118px;
   height: 118px;
   margin: 8px 0px 0px 8px;
-  padding: 5px;
+  padding: 7px 5px 3px 5px;
   display: inline-block;
   vertical-align: middle;
-  transition: background 0.4s ease-in-out;
-  -o-transition: background 0.4s ease-in-out;
-  -ms-transition: background 0.4s ease-in-out;
-  -moz-transition: background 0.4s ease-in-out;
-  -webkit-transition: background 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
   text-align: center;
   text-decoration: none;
   background: rgba(255, 59, 48, 0.8);
   color: white;
   cursor: pointer;
   overflow: hidden;
+  border-radius: 20px;
 }
 #panel4 .box:hover {
   background: #ff3b30;
@@ -502,10 +532,17 @@ body img {
   color: white;
 }
 #panel5 h4 {
+  display: inline-block;
+  vertical-align: middle;
   font-size: 24px;
   font-weight: 300;
   font-family: 'Open Sans', sans-serif;
   margin: 0px;
+}
+@media screen and (max-width: 479px) {
+  #panel5 h4 {
+    margin: 0px 65px;
+  }
 }
 #panel5 h5 {
   font-size: 18px;
@@ -513,7 +550,9 @@ body img {
   font-family: 'Open Sans', sans-serif;
   margin: 0px;
 }
-#panel5 img {
+#panel5 #up-button {
+  width: 40px;
+  height: 40px;
   transform: rotate(180deg);
   -o-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
@@ -531,9 +570,26 @@ body img {
   left: auto;
   right: 20px;
   bottom: 0px;
+  background: url(images/chevron.png);
+  background-size: cover;
   opacity: 1.0;
 }
-#panel5 img:hover {
+@media screen and (max-width: 320px) {
+  #panel5 #up-button {
+    position: absolute;
+    top: 28px;
+    left: auto;
+    right: 10px;
+    bottom: auto;
+  }
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  #panel5 #up-button {
+    background: url(images/chevron@2x.png);
+    background-size: cover;
+  }
+}
+#panel5 #up-button:hover {
   opacity: 0.8;
 }
 #slider {
@@ -577,20 +633,33 @@ body img {
   margin: 0px 0px;
   width: 40px;
   height: 40px;
-  mask-image: url('chevron.png');
-  -o-mask-image: url('chevron.png');
-  -ms-mask-image: url('chevron.png');
-  -moz-mask-image: url('chevron.png');
-  -webkit-mask-image: url('chevron.png');
-  transition: opacity 0.4s ease-in-out;
-  -o-transition: opacity 0.4s ease-in-out;
-  -ms-transition: opacity 0.4s ease-in-out;
-  -moz-transition: opacity 0.4s ease-in-out;
-  -webkit-transition: opacity 0.4s ease-in-out;
-  background: #4cd964;
+  mask-image: url('images/chevron.png');
+  -o-mask-image: url('images/chevron.png');
+  -ms-mask-image: url('images/chevron.png');
+  -moz-mask-image: url('images/chevron.png');
+  -webkit-mask-image: url('images/chevron.png');
+  -webkit-mask-size: cover;
+  transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  background: #34aadc;
   cursor: pointer;
-  z-index: 2;
+  z-index: 1;
   opacity: 0.6;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  #slider #left,
+  #slider #right {
+    mask-image: url('images/chevron@2x.png');
+    -o-mask-image: url('images/chevron@2x.png');
+    -ms-mask-image: url('images/chevron@2x.png');
+    -moz-mask-image: url('images/chevron@2x.png');
+    -webkit-mask-image: url('images/chevron@2x.png');
+    -webkit-mask-size: cover;
+    background-size: cover;
+  }
 }
 #slider #left:hover,
 #slider #right:hover {
@@ -630,8 +699,8 @@ body img {
 }
 #slider #dots .dot {
   margin: 10px;
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
   transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
   -ms-transition: all 0.4s ease-in-out;
@@ -640,12 +709,12 @@ body img {
   display: inline-block;
   vertical-align: middle;
   border-radius: 5px;
-  border: 2px solid #4cd964;
-  background-color: transparent;
+  background-color: #34aadc;
   cursor: pointer;
+  opacity: 0.6;
 }
 #slider #dots .dot:hover {
-  background-color: #4cd964;
+  opacity: 1;
 }
 #slider #dots .selected {
   transform: scale(1.2);
@@ -653,7 +722,7 @@ body img {
   -ms-transform: scale(1.2);
   -moz-transform: scale(1.2);
   -webkit-transform: scale(1.2);
-  background-color: #4cd964;
+  opacity: 1;
 }
 #tooltip1,
 #tooltip2,

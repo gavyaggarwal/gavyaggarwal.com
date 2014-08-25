@@ -44,7 +44,12 @@ html,body {
     overflow:hidden;
     white-space: nowrap;
     opacity:0.2;
-    background-image:url('slash_it.png');
+    background-image:url('images/slash_it.png');
+    background-size:cover;
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      background-image:url('images/slash_it@2x.png');
+      background-size:cover;
+    }
   }
   #pane1 {
     @media all and (max-width: @two-pane-width) {
@@ -90,13 +95,24 @@ html,body {
         .transform(translateX(0px) scale(1.0));
       }
     }
-    img {
+    h4 {
+      .font(32px);
+      .margin(0px);
+      .center;
+    }
+    #down-button {
+      .size(40px;40px);
       .margin(auto);
       .transition(opacity);
       .margin(50px auto 0px auto);
+      background:url(images/chevron.png);
+      background-size:cover;
       display:block;
-      cursor:pointer;
       opacity:1.0;
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        background:url(images/chevron@2x.png);
+        background-size:cover;
+      }
       &:hover {
         opacity:0.8;
       }
@@ -105,10 +121,11 @@ html,body {
 }
 
 #panel2 {
-  @color:#4CD964;
+  @color:#34aadc;
   .size;
   .padding(15px 0px);
   .small-caps;
+  .transition(all);
   border-top: 2px solid @color;
   border-bottom: 2px solid @color;
   background:rgba(255,255,255,0.9);
@@ -195,7 +212,7 @@ html,body {
         &:last-child {
           img {
             max-width:473px;
-            max-height:100%;
+            max-height:80%;
           }
         }
       }
@@ -207,7 +224,7 @@ html,body {
       img {
         .size(auto;auto;);
         max-width:490px;
-        max-height:100%;
+        max-height:80%;
       }
       a {
         .size(200px);
@@ -338,15 +355,16 @@ html,body {
   .box {
     .size(118px;118px;);
     .margin(8px 0px 0px 8px);
-    .padding(5px);
+    .padding(7px 5px 3px 5px);
     .inline;
-    .transition(background);
+    .transition(all);
     .center;
     text-decoration:none;
     background:fade(@color, 80%);
     color:white;
     cursor:pointer;
     overflow:hidden;
+    border-radius:20px;
     &:hover {
       background:@color;
     }
@@ -381,19 +399,33 @@ html,body {
   .position(relative);
   color:white;
   h4 {
+    .inline;
     .font(24px);
     .margin(0px);
+    @media screen and (max-width: 479px) {
+      .margin(0px 65px);
+    }
   }
   h5 {
     .font(18px);
     .margin(0px);
   }
-  img {
+  #up-button {
+    .size(40px;40px);
     .rotate(180);
     .margin(auto);
     .transition(opacity);
     .position(absolute;0px;auto;0px;20px);
+    background:url(images/chevron.png);
+    background-size:cover;
     opacity:1.0;
+    @media screen and (max-width: 320px) {
+      .position(absolute;28px;auto;auto;10px);
+    }
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      background:url(images/chevron@2x.png);
+      background-size:cover;
+    }
     &:hover {
       opacity:0.8;
     }
@@ -401,7 +433,7 @@ html,body {
 }
 
 #slider {
-  @color:#4CD964;
+  @color:#34aadc;
   @dots-height: 30px;
   .position(relative);
   #viewport {
@@ -428,12 +460,16 @@ html,body {
   #left,#right {
     .margin(0px 0px);
     .size(40px;40px;);
-    .mask-image('chevron.png');
-    .transition(opacity);
+    .mask-image('images/chevron.png');
+    .transition(all);
     background:@color;
     cursor:pointer;
-    z-index:2;
+    z-index:1;
     opacity:0.6;
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .mask-image('images/chevron@2x.png');
+      background-size:cover;
+    }
     &:hover {
       opacity:1;
     }
@@ -452,22 +488,26 @@ html,body {
     .padding(0px);
     .center;
     .dot {
-      @dot-size:6px;
+      @dot-size:10px;
       .margin(10px);
       .size(@dot-size;@dot-size;);
       .transition(all);
       .inline;
       border-radius:5px;
-      border:2px solid @color;
-      background-color:transparent;
+      //border:2px solid @color;
+      //background-color:transparent;
+      background-color:@color;
       cursor:pointer;
+      opacity:0.6;
       &:hover {
-        background-color:@color;
+        opacity:1;
+        //background-color:@color;
       }
     }
     .selected {
       .transform(scale(1.2));
-      background-color:@color;
+      opacity:1;
+      //background-color:@color;
     }
   }
 }

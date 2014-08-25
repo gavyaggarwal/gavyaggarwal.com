@@ -1,3 +1,5 @@
+isDev = yes
+
 $ ->
   console.log "gavyaggarwal.com Loaded"
   do loadEditor
@@ -5,6 +7,8 @@ $ ->
   do setupScroller
   do setupContactForm
   do setupHashes
+  do setupAnalytics
+  do monitorStatus
 
 loadEditor = ->
   request1 = $.ajax("index.jade")
@@ -17,7 +21,8 @@ loadEditor = ->
 typeCode = (code, pane) ->
   lines = code.split "\n"
   finished = ->
-    console.log "Finished Typing Code"
+    console.log "Finished Typing Code (#{pane})"
+    sendEvent 'editor', 'finished typing', pane
   typeLine lines, finished, pane, 0
 
 typeLine = (code, callback, pane, line) ->
@@ -67,13 +72,17 @@ createElement = (char, color) ->
 
 setupButtons = ->
   $("#down-button").click ->
+    sendEvent 'navigation', 'click', 'down button'
     $('html,body').animate
        scrollTop:$("#panel2").offset().top
        1000
+    return false
   $("#up-button").click ->
+    sendEvent 'navigation', 'click', 'up button'
     $('html,body').animate
       scrollTop: 0
       1000
+    return false
 
 
 
@@ -116,6 +125,27 @@ scrollToPage = ->
   $(dots).removeClass("selected")
   $(dots[scrollerCurrentPage]).addClass("selected")
 
+  do changeSliderColor
+  content = $($('.slider-content')[scrollerCurrentPage]).attr 'id'
+  sendEvent 'projects', 'loaded', content
+
+changeSliderColor = ->
+  panel = $ '#panel2'
+  slider = panel.find '#slider'
+  content = slider.find('.slider-content')[scrollerCurrentPage]
+  arrows = slider.find '#left,#right'
+  dots = slider.find '.dot'
+
+  color = $(content).css('color')
+  panel.css
+    color:color
+    borderTopColor:color
+    borderBottomColor:color
+  arrows.css
+    background:color
+  dots.css
+    backgroundColor:color
+
 setupContactForm = ->
   $("#contactmessage").keyup ->
     this.style.height = '1px'
@@ -150,6 +180,7 @@ setupContactForm = ->
         x:'0px'
         70
         'ease'
+      sendEvent 'contact', 'submit', 'invalid data'
     else
       formData = do $(form).serialize
       status = $("#contactstatus")
@@ -159,12 +190,14 @@ setupContactForm = ->
         $(status).css
           opacity:1
         console.log "Error Submitting Contact Form"
+        sendEvent 'contact', 'submit', 'error'
       formSuccess = ->
         $(status).html "Thanks for getting in touch. I'll get back to you soon!"
         $(status).css
           opacity:1
         $(form).find("input[type=text], textarea").val ""
         console.log "Contact Form Submitted Successfully"
+        sendEvent 'contact', 'submit', 'success'
       formSubmitted = ->
         $(status).html "Loading"
         $(status).css
@@ -178,6 +211,7 @@ setupContactForm = ->
             do formError
         error: ->
           do formError
+      sendEvent 'contact', 'submit', 'sending request to bin'
       do formSubmitted
 
 setupHashes = ->
@@ -187,7 +221,96 @@ setupHashes = ->
       elemHeight = $(this).parent().height()
       winTop = window.pageYOffset
       if elemTop < winTop + 10 and (elemTop + elemHeight) > winTop + 10
-        window.location.hash = $(this).attr 'id'
+        initialHash = window.location.hash
+        window.location.hash = '#' + $(this).attr 'id'
         $(document).scrollTop winTop #Prevents Scrolling
-    #console.log window.pageYOffset
+        if window.location.hash isnt initialHash
+          console.log "Page Changed to #{window.location.hash}"
   $(document).bind 'scroll', onScroll
+
+setupAnalytics = ->
+  ((i, s, o, g, r, a, m) ->
+    i["GoogleAnalyticsObject"] = r
+    i[r] = i[r] or ->
+      (i[r].q = i[r].q or []).push arguments
+      return
+
+    i[r].l = 1 * new Date()
+
+    a = s.createElement(o)
+    m = s.getElementsByTagName(o)[0]
+
+    a.async = 1
+    a.src = g
+    m.parentNode.insertBefore a, m
+    return
+  ) window, document, "script", "//www.google-analytics.com/analytics.js", "ga"
+
+  trackingID = if isDev then 'UA-54102576-1' else 'UA-54102576-2'
+  ga 'create', trackingID,
+    alwaysSendReferrer:yes
+  ga 'require', 'displayfeatures'
+  ga 'require', 'linkid'
+  ga 'send', 'pageview'
+
+  headings = $ '#panel1 #items h3'
+  headings.mouseover ->
+    text = $(this).html()
+    sendEvent 'headers', 'hover', text
+
+  fields = $ '#panel4 form input,textarea'
+  fields.focus ->
+    text = $(this).attr('placeholder')
+    sendEvent 'contact', 'focus', text
+
+  links = $ '#panel4 .box'
+  links.click ->
+    text = $(this).find('span').html()
+    sendEvent 'social links', 'click', text
+
+sendPageView = (page) ->
+  ga 'send', 'pageview',
+    'page':page
+
+sendEvent = (category, action, label, value) ->
+  ga 'send', 'event', category, action, label, value
+
+
+
+siteOnline = yes
+monitorStatus = ->
+  callback = (status) ->
+    if status.valueOf() is 'offline'.valueOf()
+      do deletePage if siteOnline
+    else
+      do restorePage if not siteOnline
+  authenticate = ->
+    $.get 'http://bin.gavyaggarwal.com/gavyaggarwal-status', callback
+  do authenticate
+  setInterval authenticate, 3000
+
+deletePage = ->
+  siteOnline = no
+  console.log 'Bye Guys! This site is going down!'
+  container = $ '#panel1 #content'
+  do container.empty
+  container.html '<h4>This website is temporarily unavailable.</h4>
+  <h4>Please try again in a bit.</h4>'
+  do $('#background').empty
+  do $('#panel2').remove
+  do $('#panel3').remove
+  do $('#panel4').remove
+  do $('#panel5').remove
+  sendEvent 'page status', 'disabled'
+
+restorePage = ->
+  siteOnline = yes
+  #Alternate method of sending analytics with callback
+  callback = ->
+    console.log 'Annnd, we\'re back up!'
+    do location.reload
+  ga 'send',
+    'hitCallback': callback
+    'hitType': 'event'
+    'eventCategory': 'page status'
+    'eventAction': 'enabled'

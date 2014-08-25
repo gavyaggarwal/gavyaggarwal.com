@@ -3,10 +3,11 @@ html(lang='en')
   head
     title Gavy Aggarwal
     link(rel='stylesheet', href='style.css', type='text/css')
+    meta(name='viewport', content='width=device-width, maximum-scale=1.0')
     script(type='text/javascript', src='http://code.jquery.com/jquery-2.1.1.min.js')
     script(type='text/javascript', src='transit.js')
+    script(type='text/javascript', src='analytics.js')
     script(type='text/javascript', src='script.js')
-    meta(name='viewport', content='width=device-width, maximum-scale=1.0')
   body
     #background
       #pane1
@@ -42,7 +43,7 @@ html(lang='en')
               br
               span An aggressive go-doer who'll do anything to overcome the obstacles in his way
         a(href='#projects')
-          img(id='down-button', src='chevron.png')
+          #down-button
     #panel2
       a#projects.anchor
       h2 Projects
@@ -50,24 +51,24 @@ html(lang='en')
         #viewport
           .slider-content(id='passprotect')
             p PassProtect is a cross-platform password manager app that I created when I got tired of trying to remember all my passwords and losing the sticky notes I used to write them on. I've really focused on security and UX design in this app.
-            img(src='images/passprotect.png')
+            img(src='images/projects/passprotect.png')
             p
               a(href='http://passprotect.co') Visit Website
               a(href='https://itunes.apple.com/us/app/id906481898') Download for iOS
               a(href='https://play.google.com/store/apps/details?id=co.passprotect') Download for Android
           .slider-content(id='dyli')
             .col
-              img#logo(src='images/dyli1.png')
+              img#logo(src='images/projects/dyli1.png')
               br
               p I developed the front-end of dyli, a unique fashion app that lets you discover designers, brands, and boutiques based on your fasion tastes.
               p
                 a(href='https://itunes.apple.com/us/app/id858505722') Download
                 a(href='http://dyliapp.com') Learn More
             .col
-              img(src='images/dyli2.png')
+              img(src='images/projects/dyli2.png')
           .slider-content(id="remotemusic")
             .col
-              img(src='images/remotemusic.png')
+              img(src='images/projects/remotemusic.png')
             .col
               h1 Remote Music
               p Remote Music is a proof of concept application that hosts a web server from an iOS device, allowing computers on the same network to connect and play songs from the device's music gallery. I decided to open source this app to demonstrate how I was able to accomplish this and allow others to learn from the source code.
@@ -125,27 +126,27 @@ html(lang='en')
         h5(id="contactstatus")
       .col
         h3 Find Me On
-        a.box(href='http://facebook.com/gavyaggarwal')
-          img(src='facebook.png')
+        a.box(href='http://facebook.com/gavyaggarwal', target='_blank')
+          img(src='images/facebook.png')
           span Facebook
-        a.box(href='http://twitter.com/itsgavy')
-          img(src='twitter.png')
+        a.box(href='http://twitter.com/itsgavy', target='_blank')
+          img(src='images/twitter.png')
           span Twitter
-        a.box(href='https://plus.google.com/u/0/115071276851956208853/')
-          img(src='google.png')
+        a.box(href='https://plus.google.com/u/0/115071276851956208853/', target='_blank')
+          img(src='images/google.png')
           span Google+
-        a.box(href='https://github.com/gavyaggarwal')
-          img(src='github.png')
+        a.box(href='https://github.com/gavyaggarwal', target='_blank')
+          img(src='images/github.png')
           span Github
-        a.box(href='http://instagram.com/gavyaggarwal')
-          img(src='instagram.png')
+        a.box(href='http://instagram.com/gavyaggarwal', target='_blank')
+          img(src='images/instagram.png')
           span Instagram
-        a.box(href='http://www.linkedin.com/pub/gavy-aggarwal/7a/184/743')
-          img(src='linkedin.png')
+        a.box(href='http://www.linkedin.com/pub/gavy-aggarwal/7a/184/743', target='_blank')
+          img(src='images/linkedin.png')
           span LinkedIn
     #panel5
       a#bottom.anchor
       h4 Copyright 2014 by Gavy Aggarwal
       h5 Built Using Jade, LESS, Coffee, and Love
       a(href='#top')
-        img(id='up-button', src='chevron.png')
+        #up-button
