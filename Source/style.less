@@ -218,6 +218,25 @@ html,body {
         }
       }
     }
+    #itransfer {
+      @color:#16ca87;
+      .center;
+      color:@color;
+      img {
+        .size(auto;auto;);
+        max-width:490px;
+        max-height:80%;
+      }
+      a {
+        .size(200px);
+        box-shadow:0 0 1px @color;
+        border:1px solid @color;
+        background:fade(@color, 80%);
+        &:hover {
+          background:@color;
+        }
+      }
+    }
     #remotemusic {
       @color:#FF8C00;
       .center;
@@ -226,6 +245,28 @@ html,body {
         .size(auto;auto;);
         max-width:490px;
         max-height:80%;
+      }
+      a {
+        .size(200px);
+        box-shadow:0 0 1px @color;
+        border:1px solid @color;
+        background:fade(@color, 80%);
+        &:hover {
+          background:@color;
+        }
+      }
+    }
+    #findmecca {
+      @color:#9d02a8;
+      .center;
+      color:@color;
+      img {
+        .size(auto;auto;);
+        max-width:490px;
+        max-height:80%;
+      }
+      #icon {
+        .size(120px);
       }
       a {
         .size(200px);

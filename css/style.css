@@ -303,6 +303,26 @@ body img {
   max-width: 473px;
   max-height: 80%;
 }
+#panel2 #slider #itransfer {
+  text-align: center;
+  color: #16ca87;
+}
+#panel2 #slider #itransfer img {
+  width: auto;
+  height: auto;
+  max-width: 490px;
+  max-height: 80%;
+}
+#panel2 #slider #itransfer a {
+  width: 200px;
+  height: auto;
+  box-shadow: 0 0 1px #16ca87;
+  border: 1px solid #16ca87;
+  background: rgba(22, 202, 135, 0.8);
+}
+#panel2 #slider #itransfer a:hover {
+  background: #16ca87;
+}
 #panel2 #slider #remotemusic {
   text-align: center;
   color: #ff8c00;
@@ -322,6 +342,30 @@ body img {
 }
 #panel2 #slider #remotemusic a:hover {
   background: #ff8c00;
+}
+#panel2 #slider #findmecca {
+  text-align: center;
+  color: #9d02a8;
+}
+#panel2 #slider #findmecca img {
+  width: auto;
+  height: auto;
+  max-width: 490px;
+  max-height: 80%;
+}
+#panel2 #slider #findmecca #icon {
+  width: 120px;
+  height: auto;
+}
+#panel2 #slider #findmecca a {
+  width: 200px;
+  height: auto;
+  box-shadow: 0 0 1px #9d02a8;
+  border: 1px solid #9d02a8;
+  background: rgba(157, 2, 168, 0.8);
+}
+#panel2 #slider #findmecca a:hover {
+  background: #9d02a8;
 }
 #panel3 {
   width: 100%;
